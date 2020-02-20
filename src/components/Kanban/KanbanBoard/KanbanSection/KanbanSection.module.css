@@ -1,0 +1,21 @@
+.KanbanSection {
+    background-color: lightblue; 
+    border-radius: 16px; 
+    margin: 10px;
+    width: 180px;
+    height: 98%;   
+
+}
+
+.KanbanSection header.sectionHeader{
+    text-align: center;
+}
+
+.KanbanSection div.sectionItems{
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+    height: 92%;
+    
+    
+}

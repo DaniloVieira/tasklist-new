@@ -1,0 +1,17 @@
+.KanbanBoard {
+    border: 10px solid #52839c;
+    background-color: #52839c;
+    margin: 2%;
+    border-radius: 16px;
+    /* padding: 10px 0; */
+    height: 500px;
+
+}
+
+/* .KanbanBoard div {  */
+.ColumnGroup{    
+    height: 80%;
+    display: flex;
+
+    /* justify-content: space-evenly; */
+}

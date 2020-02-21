@@ -1,18 +1,18 @@
 import React, { Component } from 'react'
 
-import classes from './Modal.css';
+import classes from './Modal.module.css';
 import Aux from '../../../hoc/_Aux/_Aux'
 import Backdrop from '../Backdrop/Backdrop'
 
 class Modal extends Component {
 
-    shouldComponentUpdate(nextProp, nextState){
-        return nextProp.show !== this.props.show;        
-    }
+    // shouldComponentUpdate(nextProp, nextState){
+    //     return nextProp.show !== this.props.show;        
+    // }
 
-    componentDidUpdate(){
-        console.log('Modal did update!!');
-    }
+    // componentDidUpdate(){
+    //     console.log('Modal did update!!');
+    // }
     render(){
         return (
             <Aux>

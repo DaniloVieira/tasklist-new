@@ -8,17 +8,12 @@ import KanbanItem from '../KanbanItem/KanbanItem';
 const kanbanSection = (props) => {
     const itemsToRender = props.tasks
         .map(task => {
-            return <KanbanItem title={task.title} content={task.description} status={task.status}/>
+            return <KanbanItem key={task.title} title={task.title} content={task.description} status={task.status}/>
         })
     return (
         <div className={classes.KanbanSection}>
-            <header className={classes.sectionHeader}>{props.title}</header>
-            <div className={classes.sectionItems}>
-                {/* <KanbanItem title="Task0" content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ut eleifend ex, ut imperdiet lectus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ut eleifend ex, ut imperdiet lectus."/>
-                <KanbanItem title="Task1" content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ut eleifend ex, ut imperdiet lectus."/>
-                <KanbanItem title="Task2" content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ut eleifend ex, ut imperdiet lectus."/>
-                <KanbanItem title="Task3" content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ut eleifend ex, ut imperdiet lectus."/>
-                 */}
+            <header className={classes.sectionHeader}>{props.title}{props.order}</header>
+            <div className={classes.sectionItems}>                
                  {itemsToRender}
             </div>
         </div>

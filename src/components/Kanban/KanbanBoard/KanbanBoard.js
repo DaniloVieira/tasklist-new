@@ -15,7 +15,7 @@ const kanbanBoard = (props) => {
                 return tsk.status === section.title;                
             });
             return (
-                <KanbanSection key={section.title} title={section.title} tasks={tasks}/>
+                <KanbanSection key={section.title} title={section.title} order={section.order} tasks={tasks}/>
             );
         });
 
@@ -26,7 +26,8 @@ const kanbanBoard = (props) => {
             <div className={classes.ColumnGroup}>
                 {sectionsToRender}               
             </div>
-            <button>ADD SECTION</button>
+            <button onClick={props.showModalSection}>ADD SECTION</button>
+            <button onClick={props.showModalKanbanItem}>ADD ITEM</button>
         </div>
     );
 }

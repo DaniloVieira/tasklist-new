@@ -12,6 +12,12 @@ code {
     monospace;
 }
 
+label > input, select {
+    margin-left: 5px;
+    border-radius: 5px;
+    border:1px solid #cccccc
+}
+
 /* width */
 ::-webkit-scrollbar {
   width: 5px;

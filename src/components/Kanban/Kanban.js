@@ -39,10 +39,18 @@ class Kanban extends Component {
         showModalAddSection: false,
         showModalAddItem: false,
 
+        task: { 
+            title: '',
+            status: '',
+            description: ''
+        }
+
     }
 
     getStatusList(){
-        let statusList = ['TO DO', 'DOING', 'DONE'];
+        let statusList = [];
+         this.state.sections
+            .map(sec => (statusList.push(sec.title)));
 
         return statusList
     }
@@ -56,9 +64,10 @@ class Kanban extends Component {
     }
 
     submitItemHandler = (item) => {
-        let items = [item];
-        items.push([...this.state.tasks]);
+        let items = [item, ...this.state.tasks];
+        //items.push(...this.state.tasks);
         this.setState({tasks: items})
+        this.toggleItemModalHandler(false);
     }
 
     submitSectionHandler = (section) => {
@@ -86,7 +95,7 @@ class Kanban extends Component {
                     <KanbanAddSection submitSectionHandler={this.submitSectionHandler} totalSections={this.state.sections.length}/>
                 </Modal>
                 <Modal show={this.state.showModalAddItem} modalClosed={() => this.toggleItemModalHandler(false)}>
-                    <KanbanAddItem handleAddItem={this.submitItemHandler} statusList={this.getStatusList()}/>
+                    <KanbanAddItem submitSectionHandler={this.submitItemHandler} statusList={this.getStatusList()}/>
                 </Modal>
                 <KanbanBoard sections={this.state.sections} tasks={this.state.tasks} showModalSection={() => this.toggleSectionModalHandler(true)} showModalKanbanItem={() => this.toggleItemModalHandler(true)}/>
             </Aux>

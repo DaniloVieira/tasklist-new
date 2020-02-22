@@ -9,6 +9,19 @@
     
     margin-left: 10px;
     /* scrollbar-width: none; */
+    display: flex;
+    justify-content: space-between;
+}
+.KanbanItem header.itemHeader > svg{
+    margin-right: 5px;
+    opacity: 0.1;    
+    
+    
+}    
+
+.KanbanItem header.itemHeader > svg:hover{
+    opacity: 1;    
+    
 }
 
 .KanbanItem p{

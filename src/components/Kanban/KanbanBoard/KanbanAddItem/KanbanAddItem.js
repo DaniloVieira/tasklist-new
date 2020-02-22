@@ -14,13 +14,13 @@ class KanbanAddItem extends Component {
     }
 
     handleChange = (event, field)  => {
-        const item = {...this.state.section};
+        const item = {...this.state.item};
         item[field] = event.target.value;
         this.setState({item: item });
     }
 
     handleAddItem = () => {
-        this.props.submitSectionHandler(this.state.section);    
+        this.props.submitSectionHandler(this.state.item);
         this.setState({item:{
             title: '',
             status: 'TO DO',
@@ -51,11 +51,10 @@ class KanbanAddItem extends Component {
                     <textarea id="itemDesctxtA" rows="4" cols="50" value={this.state.item.descrition} onChange={(event) => this.handleChange(event, 'description')}></textarea>                   
                 </label>
                 <br/>
-                <Button btnType="Success" clicked={this.props.handleAddItem}>ADD</Button>
+                <Button btnType="Success" clicked={this.handleAddItem}>ADD</Button>
             </Aux>
         );
     }
-    
 }
 
 export default KanbanAddItem;

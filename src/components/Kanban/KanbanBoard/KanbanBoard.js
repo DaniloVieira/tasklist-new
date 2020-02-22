@@ -15,7 +15,7 @@ const kanbanBoard = (props) => {
                 return tsk.status === section.title;                
             });
             return (
-                <KanbanSection key={section.title} title={section.title} order={section.order} tasks={tasks}/>
+                <KanbanSection key={section.title} title={section.title} order={section.order} tasks={tasks} clickEditItem={props.showModalKanbanItem}/>
             );
         });
 

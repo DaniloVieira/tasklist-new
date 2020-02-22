@@ -15,22 +15,26 @@ class Kanban extends Component {
         ],
         
         tasks:[
-            { 
+            {   
+                id: 1,
                 title: 'TASK0',
                 status: 'TO DO',
                 description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ut eleifend ex, ut imperdiet lectus.'
             },
             { 
+                id: 2,
                 title: 'TASK1',
                 status: 'DOING',
                 description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ut eleifend ex, ut imperdiet lectus.'
             },
             { 
+                id: 3,
                 title: 'TASK4',
                 status: 'DONE',
                 description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ut eleifend ex, ut imperdiet lectus.'
             },
             { 
+                id: 4,
                 title: 'TASK5',
                 status: 'TO DO',
                 description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ut eleifend ex, ut imperdiet lectus.'
@@ -40,8 +44,9 @@ class Kanban extends Component {
         showModalAddItem: false,
 
         task: { 
+            id: null,
             title: '',
-            status: '',
+            status: 'TO DO',
             description: ''
         }
 
@@ -59,14 +64,25 @@ class Kanban extends Component {
         this.setState({showModalAddSection: show});
     }
 
-    toggleItemModalHandler = (show) =>{
+    toggleItemModalHandler = (show, selectedTask) =>{
+        if(selectedTask !== undefined){
+            this.setState({task: selectedTask});            
+        }
         this.setState({showModalAddItem: show});
     }
 
-    submitItemHandler = (item) => {
-        let items = [item, ...this.state.tasks];
-        //items.push(...this.state.tasks);
-        this.setState({tasks: items})
+    submitItemHandler = (task) => {
+        let tasks;
+        if(task.id === null){
+            tasks = [task, ...this.state.tasks];
+            task.id = tasks.length + 1;
+            
+        } else {
+            const taskIndex = this.state.tasks.findIndex(tsk => tsk.id === task.id);
+            tasks = [...this.state.tasks];
+            tasks[taskIndex] = task;
+        }
+        this.setState({tasks: tasks});
         this.toggleItemModalHandler(false);
     }
 
@@ -85,6 +101,12 @@ class Kanban extends Component {
         }else{
             alert('There\'s already a section with this title!!!' );
         }
+    }  
+    
+    handleChange = (event, field)  => {
+        const task = {...this.state.task};
+        task[field] = event.target.value;
+        this.setState({task: task });
     }
     
     render(){
@@ -95,9 +117,9 @@ class Kanban extends Component {
                     <KanbanAddSection submitSectionHandler={this.submitSectionHandler} totalSections={this.state.sections.length}/>
                 </Modal>
                 <Modal show={this.state.showModalAddItem} modalClosed={() => this.toggleItemModalHandler(false)}>
-                    <KanbanAddItem submitSectionHandler={this.submitItemHandler} statusList={this.getStatusList()}/>
+                    <KanbanAddItem task={this.state.task} submitItemHandler={this.submitItemHandler} statusList={this.getStatusList()} handleChange={this.handleChange}/>
                 </Modal>
-                <KanbanBoard sections={this.state.sections} tasks={this.state.tasks} showModalSection={() => this.toggleSectionModalHandler(true)} showModalKanbanItem={() => this.toggleItemModalHandler(true)}/>
+                <KanbanBoard sections={this.state.sections} tasks={this.state.tasks} showModalSection={() => this.toggleSectionModalHandler(true)} showModalKanbanItem={this.toggleItemModalHandler}/>
             </Aux>
         )
     }

@@ -7,7 +7,7 @@ import KanbanItem from '../KanbanItem/KanbanItem';
 const kanbanSection = (props) => {
     const itemsToRender = props.tasks
         .map(task => {
-            return <KanbanItem key={task.title} title={task.title} content={task.description} status={task.status} edit={props.clickEditItem}/>
+            return <KanbanItem task={task} key={task.title} edit={() => props.clickEditItem(true, task)}/>
         })
     return (
         <div className={classes.KanbanSection}>

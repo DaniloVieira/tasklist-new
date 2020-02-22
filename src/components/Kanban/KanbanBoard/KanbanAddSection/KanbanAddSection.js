@@ -13,9 +13,9 @@ class kanbanAddSection extends Component {
         ordersArray: []
     }
 
-    componentDidMount(){
-        console.log(this.state.section);
-    }
+    // componentDidMount(){
+    //     console.log(this.state.section);
+    // }
     
     handleChange = (event, field)  => {
         const section = {...this.state.section};

@@ -5,6 +5,7 @@ import { FaPencilAlt } from "react-icons/fa";
 const kanbanCard = (props) => {
     
     const dragStart = e => {
+        
         console.log(e);
         e.persist();
         e.dataTransfer.setData('card_id', e.target.id);

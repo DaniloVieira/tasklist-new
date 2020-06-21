@@ -3,44 +3,28 @@ import React, { Component } from 'react';
 import Aux from '../../../../hoc/_Aux/_Aux';
 import Button from '../../../UI/Button/Button';
 
-class KanbanAddItem extends Component {    
+class KanbanAddItem extends Component {
 
-    // state = {
-    //     item:{
-    //         title: '',
-    //         status: 'TO DO',
-    //         description: ''
-    //     }
+    newTask = {
+        id: null,
+            title: '',
+            status: 'TO DO',
+            description: ''
+    } 
 
-    //     //item: this.props.task
-    // }
-
-    // componentWillReceiveProps(){
-    //     console.log(this.props.task);
-    // }
-    // componentDidUpdate(){
-    //     console.log('[componentDidUpdate] '+this.props.task);
-    //     //this.setState({item: this.props.task });
-    // }
-    // componentDidMount(){
-    //     console.log('[componentDidMount] '+this.props.task);
-    //     this.setState({item: this.props.task });
-    // }
-
-
-    // handleChange = (event, field)  => {
-    //     const item = {...this.state.item};
-    //     item[field] = event.target.value;
-    //     this.setState({item: item });
-    // }
+    state = {
+        task: {...this.newTask}
+    }
 
     handleAddItem = () => {
-        this.props.submitItemHandler(this.props.task);
-        // this.setState({item:{
-        //     title: '',
-        //     status: 'TO DO',
-        //     description: ''
-        // }});    
+        this.props.submitItemHandler(this.state.task);
+        this.setState({task: this.newTask });
+    }
+
+    handleChange = (event, field)  => {
+        const task = {...this.state.task};
+        task[field] = event.target.value;
+        this.setState({task: task });
     }
 
     render(){
@@ -51,23 +35,23 @@ class KanbanAddItem extends Component {
             <Aux>
                 <label htmlFor="itemTittleIpt">
                     Title
-                    <input id="itemTittleIpt" type="text" value={this.props.task.title} onChange={(event) => this.props.handleChange(event, 'title')} />
+                    <input id="itemTittleIpt" type="text" value={this.state.task.title} onChange={(event) => this.handleChange(event, 'title')} />
                 </label>
                 <br/>
                 <label htmlFor="sectionStatusSel">
                     Status
-                    <select id="sectionStatusSel" defaultValue={this.props.task.status} onChange={(event) => this.props.handleChange(event, 'status')}>
+                    <select id="sectionStatusSel" defaultValue={this.state.task.status} onChange={(event) => this.handleChange(event, 'status')}>
                         {options}    
                     </select>
                 </label>
                 <br/>
                 <label htmlFor="itemDesctxtA">
                     Descrition
-                    <textarea id="itemDesctxtA" rows="4" cols="50" value={this.props.task.description} onChange={(event) => this.props.handleChange(event, 'description')}></textarea>                   
+                    <textarea id="itemDesctxtA" rows="4" cols="50" value={this.state.task.description} onChange={(event) => this.handleChange(event, 'description')}></textarea>                   
                 </label>
                 <br/>
                 
-                {this.props.task.title}
+                {this.state.task.title}
                 <br/>
                 <Button btnType="Success" clicked={this.handleAddItem}>ADD</Button>
             </Aux>

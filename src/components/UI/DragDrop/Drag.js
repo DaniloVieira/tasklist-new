@@ -4,15 +4,8 @@ import React from 'react'
 
 const drag = (props) => {
     const dragStart = e => {
-        //TODO move this bloco to another component?
-       const task = {
-           ...props.dataItem,
-            order: props.order
-        }
-       //const strObj = JSON.stringify(props.dataItem);
-       const strObj = JSON.stringify(task);       
-       console.log('[DRAG]',strObj);
-       e.dataTransfer.setData('drag_item', strObj);
+        const strObj = JSON.stringify(props.dataItem);
+        e.dataTransfer.setData('drag_item', strObj);
     }
     return (
         <div id={props.id} draggable onDragStart={dragStart} className={props.classes}>

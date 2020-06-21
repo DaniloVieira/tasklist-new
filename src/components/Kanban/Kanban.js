@@ -49,17 +49,17 @@ class Kanban extends Component {
                 title: 'TASK6',
                 status: 'TO DO',
                 description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ut eleifend ex, ut imperdiet lectus.'
+            },
+            { 
+                id: 6,
+                order: 6,
+                title: 'TASK7',
+                status: 'DOING',
+                description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ut eleifend ex, ut imperdiet lectus.'
             }
         ],
         showModalAddSection: false,
-        showModalAddItem: false,
-
-        task: { 
-            id: null,
-            title: '',
-            status: 'TO DO',
-            description: ''
-        }
+        showModalAddItem: false
     }
 
     constructor(props) {
@@ -74,19 +74,21 @@ class Kanban extends Component {
         return [...tasks].sort((a, b) => a.order-b.order);
     }
 
-    componentDidMount() {
-        console.log('[componentDidMount]');
-    }
+    // componentDidMount() {
+    //     console.log('[componentDidMount]');
+    // }
     
-    componentDidUpdate(){
-        console.log('[componentDidUpdate]');
-    }
-
+    // componentDidUpdate(){
+    //     console.log('[componentDidUpdate]');
+    // }
+    
     itemDroped = (task) => {
         const updatedTasks = [...this.state.tasks];
         const taskIndex = updatedTasks.findIndex( t => t.id === task.id);
-        updatedTasks.splice(taskIndex, 1, task);
-        this.setState({tasks: this.sortTasks(updatedTasks)});
+        updatedTasks.splice(taskIndex, 1);
+        updatedTasks.splice(task.order-1, 0, task);  
+        const reordered = updatedTasks.map((t, i) => ({...t, order: i+1}));
+        this.setState({tasks: reordered});
     }
 
     getStatusList(){
@@ -111,8 +113,7 @@ class Kanban extends Component {
         let tasks;
         if(task.id === null){
             tasks = [task, ...this.state.tasks];
-            task.id = tasks.length + 1;
-            
+            task.id = tasks.length + 1;            
         } else {
             const taskIndex = this.state.tasks.findIndex(tsk => tsk.id === task.id);
             tasks = [...this.state.tasks];
@@ -146,7 +147,6 @@ class Kanban extends Component {
     }
     
     render(){
-        console.log('[render]');
         return (
             <Aux>
                 <Modal show={this.state.showModalAddSection} modalClosed={() => this.toggleSectionModalHandler(false)}>

@@ -2,9 +2,8 @@
     background-color: lightblue; 
     /* border-radius: 16px;  */
     margin: 10px;
-    width: 180px;
-    height: 98%;   
-
+    width: 300px;
+    /* height: 98%; */
 }
 
 .KanbanSection header.sectionHeader{
@@ -19,21 +18,39 @@
     height: 92%;    
 }
 
-.dragble_card{
+.DragableCard{
     margin: 0px 5px 0px 5px;
-    
-
 }
 
-.drop_zone_initial{
-    height: 10px;
-    border: solid black 0.5px
+.DropZoneInitialDefault{
+    height: 100%;
+    /* border: solid orangered 0.5px; */
+    margin: 0px 5px 0px 5px;
 }
 
-.drop_zone_enter{
+.DropZoneTransition{
+    transition: all 0.2s ease-out;
+}
+
+.DropZoneEnterDefault div.active{
     height: 100px;
     border: dotted orange 5px;
     background-color: lightgrey;
     margin-top: 5px;
     margin-bottom: 5px;
+}
+
+.DropZoneInitial{
+    height: 4px;
+    /* border: solid black 0.5px; */
+    margin-top: 3px;
+    margin-bottom: 3px;
+}
+
+.DropZoneEnter{
+    height: 100px;
+    border: dotted orange 5px;
+    background-color: lightgrey;
+    margin-top: 3px;
+    margin-bottom: 3px;
 }

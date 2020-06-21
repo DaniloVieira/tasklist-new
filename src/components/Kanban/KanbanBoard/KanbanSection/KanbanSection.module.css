@@ -1,6 +1,6 @@
 .KanbanSection {
     background-color: lightblue; 
-    border-radius: 16px; 
+    /* border-radius: 16px;  */
     margin: 10px;
     width: 180px;
     height: 98%;   
@@ -9,13 +9,31 @@
 
 .KanbanSection header.sectionHeader{
     text-align: center;
+    margin-bottom: 10px;
 }
 
 .KanbanSection div.sectionItems{
     display: flex;
     flex-direction: column;
     overflow-y: scroll;
-    height: 92%;
+    height: 92%;    
+}
+
+.dragble_card{
+    margin: 0px 5px 0px 5px;
     
-    
+
+}
+
+.drop_zone_initial{
+    height: 10px;
+    border: solid black 0.5px
+}
+
+.drop_zone_enter{
+    height: 100px;
+    border: dotted orange 5px;
+    background-color: lightgrey;
+    margin-top: 5px;
+    margin-bottom: 5px;
 }

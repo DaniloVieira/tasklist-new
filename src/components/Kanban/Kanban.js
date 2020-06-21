@@ -17,25 +17,36 @@ class Kanban extends Component {
         tasks:[
             {   
                 id: 1,
+                order: 3,
                 title: 'TASK0',
                 status: 'TO DO',
                 description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ut eleifend ex, ut imperdiet lectus.'
             },
             { 
                 id: 2,
+                order: 2,
                 title: 'TASK1',
-                status: 'DOING',
+                status: 'TO DO',
                 description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ut eleifend ex, ut imperdiet lectus.'
             },
             { 
                 id: 3,
+                order: 1,
                 title: 'TASK4',
-                status: 'DONE',
+                status: 'TO DO',
                 description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ut eleifend ex, ut imperdiet lectus.'
             },
             { 
                 id: 4,
+                order: 5,
                 title: 'TASK5',
+                status: 'TO DO',
+                description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ut eleifend ex, ut imperdiet lectus.'
+            },
+            { 
+                id: 5,
+                order: 4,
+                title: 'TASK6',
                 status: 'TO DO',
                 description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ut eleifend ex, ut imperdiet lectus.'
             }
@@ -49,14 +60,39 @@ class Kanban extends Component {
             status: 'TO DO',
             description: ''
         }
+    }
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            ...this.state,
+            tasks: this.sortTasks(this.state.tasks)
+        }
+    }
+
+    sortTasks(tasks) {
+        return [...tasks].sort((a, b) => a.order-b.order);
+    }
+
+    componentDidMount() {
+        console.log('[componentDidMount]');
+    }
+    
+    componentDidUpdate(){
+        console.log('[componentDidUpdate]');
+    }
+
+    itemDroped = (task) => {
+        const updatedTasks = [...this.state.tasks];
+        const taskIndex = updatedTasks.findIndex( t => t.id === task.id);
+        updatedTasks.splice(taskIndex, 1, task);
+        this.setState({tasks: this.sortTasks(updatedTasks)});
     }
 
     getStatusList(){
         let statusList = [];
          this.state.sections
             .map(sec => (statusList.push(sec.title)));
-
         return statusList
     }
 
@@ -110,7 +146,7 @@ class Kanban extends Component {
     }
     
     render(){
-
+        console.log('[render]');
         return (
             <Aux>
                 <Modal show={this.state.showModalAddSection} modalClosed={() => this.toggleSectionModalHandler(false)}>
@@ -119,7 +155,12 @@ class Kanban extends Component {
                 <Modal show={this.state.showModalAddItem} modalClosed={() => this.toggleItemModalHandler(false)}>
                     <KanbanAddItem task={this.state.task} submitItemHandler={this.submitItemHandler} statusList={this.getStatusList()} handleChange={this.handleChange}/>
                 </Modal>
-                <KanbanBoard sections={this.state.sections} tasks={this.state.tasks} showModalSection={() => this.toggleSectionModalHandler(true)} showModalKanbanItem={this.toggleItemModalHandler}/>
+                <KanbanBoard 
+                    sections={this.state.sections} 
+                    tasks={this.state.tasks} 
+                    showModalSection={() => this.toggleSectionModalHandler(true)} 
+                    showModalKanbanItem={this.toggleItemModalHandler}
+                    itemDroped={this.itemDroped}/>
             </Aux>
         )
     }

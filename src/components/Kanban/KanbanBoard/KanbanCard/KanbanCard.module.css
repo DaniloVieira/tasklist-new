@@ -1,8 +1,8 @@
 .KanbanItem {
     background-color: white;
-    border-radius: 16px;
+    /* border-radius: 16px; */
     height: 100px;
-    margin: 10px 5px;
+    /* margin: 10px 5px; */
 }
 
 .KanbanItem header.itemHeader{
